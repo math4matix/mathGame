@@ -3,7 +3,7 @@ using Unity.Multiplayer.Center.Common;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class numberController : MonoBehaviour
+public class numberControllerMinus : MonoBehaviour
 {
     [SerializeField]
     public TMP_Text _number1Text;
@@ -50,16 +50,11 @@ public class numberController : MonoBehaviour
         cookieObject.SetActive(false); // Makes the image invisible
     }
     
-    private int RandomNumber()
-    {
-        return Random.Range(_minValue, _maxValue + 1);
-    }
-
     private void GenerateEquasion()
     {
-        _number1 = RandomNumber();
-        _number2 = RandomNumber();
-        _answer = _number1 + _number2;
+        _number1 = Random.Range(_minValue, _maxValue + 1);
+        _number2 = Random.Range(_minValue, _number1 + 1);
+        _answer = _number1 - _number2;
 
         _number1Text.text = _number1.ToString();
         _number2Text.text = _number2.ToString();

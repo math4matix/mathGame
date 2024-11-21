@@ -5,6 +5,8 @@ public class Control : MonoBehaviour
     public string sceneNameChange1;
     public string sceneNameChange2;
     public string sceneNameChange3;
+    public string sceneNameChange4;
+
 
 
     public void NextScene1()
@@ -18,6 +20,10 @@ public class Control : MonoBehaviour
     public void NextScene3()
     {
         SceneManager.LoadScene(sceneNameChange3);
+    }
+        public void NextScene4()
+    {
+        SceneManager.LoadScene(sceneNameChange4);
     }
     public void quitApplication()
     {
