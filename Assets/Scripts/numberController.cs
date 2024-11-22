@@ -103,6 +103,7 @@ public class numberController : MonoBehaviour
         _feedbackText.text = null;
         GenerateEquasion();
         MakeFieldEditable();
+        _answerField.Select();
         HideCookieImage();
         HideMonsterImage();
 
@@ -123,6 +124,7 @@ public class numberController : MonoBehaviour
         GenerateEquasion();
         HideCookieImage();
         HideMonsterImage();
+        _answerField.Select();
     }
 
     void Update()
