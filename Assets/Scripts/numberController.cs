@@ -23,6 +23,11 @@ public class numberController : MonoBehaviour
     public GameObject cookieObject;
     [SerializeField]
     public GameObject monsterObject;
+    [SerializeField]
+    private bool plusMinus;
+    [SerializeField]
+    private int _maxAnswerValue = 10;
+
     
     private int _number1;
     private int _number2;
@@ -49,20 +54,27 @@ public class numberController : MonoBehaviour
     {
         cookieObject.SetActive(false); // Makes the image invisible
     }
-    
-    private int RandomNumber()
-    {
-        return Random.Range(_minValue, _maxValue + 1);
-    }
 
     private void GenerateEquasion()
     {
-        _number1 = RandomNumber();
-        _number2 = RandomNumber();
+        if (plusMinus == true)
+        {
+        _number1 = Random.Range(_minValue, _maxValue + 1);
+        _number2 = Random.Range(_minValue, _maxAnswerValue - _number1 + 1);
         _answer = _number1 + _number2;
 
         _number1Text.text = _number1.ToString();
         _number2Text.text = _number2.ToString();
+        }
+        else
+        {
+        _number1 = Random.Range(_minValue, _maxValue + 1);
+        _number2 = Random.Range(_minValue, _number1 + 1);
+        _answer = _number1 - _number2;
+
+        _number1Text.text = _number1.ToString();
+        _number2Text.text = _number2.ToString();
+        }
     }
 
     public void CheckAnswer()

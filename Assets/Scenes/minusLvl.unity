@@ -355,7 +355,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 349961253}
-        m_TargetAssemblyTypeName: numberControllerMinus, Assembly-CSharp
+        m_TargetAssemblyTypeName: numberController, Assembly-CSharp
         m_MethodName: NewEquation
         m_Mode: 1
         m_Arguments:
@@ -660,7 +660,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 349961251}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d62ea9300e82489d8f0f20f4d118324, type: 3}
+  m_Script: {fileID: 11500000, guid: ccddad2931abe4b4496af516b8ad8c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _number1Text: {fileID: 1083115955}
@@ -672,6 +672,8 @@ MonoBehaviour:
   _maxValue: 9
   cookieObject: {fileID: 192954961}
   monsterObject: {fileID: 537416802}
+  plusMinus: 0
+  _maxAnswerValue: 10
 --- !u!1 &403750538
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,7 +1184,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 349961253}
-        m_TargetAssemblyTypeName: numberControllerMinus, Assembly-CSharp
+        m_TargetAssemblyTypeName: numberController, Assembly-CSharp
         m_MethodName: CheckAnswer
         m_Mode: 1
         m_Arguments:

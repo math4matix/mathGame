@@ -672,6 +672,8 @@ MonoBehaviour:
   _maxValue: 9
   cookieObject: {fileID: 192954961}
   monsterObject: {fileID: 537416802}
+  plusMinus: 1
+  _maxAnswerValue: 10
 --- !u!1 &403750538
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,6 +706,7 @@ MonoBehaviour:
   sceneNameChange1: mainMenu
   sceneNameChange2: 
   sceneNameChange3: 
+  sceneNameChange4: 
 --- !u!4 &403750540
 Transform:
   m_ObjectHideFlags: 0
