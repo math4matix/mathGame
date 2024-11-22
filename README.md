@@ -1,3 +1,3 @@
 # MathGame "Занимательная математика"
 
- ## [Releases are here](/releases)
+ ## [Releases are here](https://github.com/math4matix/mathgame/releases)
