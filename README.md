@@ -1,1 +1,3 @@
-<h1>MathGame "Занимательная математика"</h1>
+# MathGame "Занимательная математика"
+
+ ## [Releases are here](https://github.com/math4matix/mathGame/releases)
