@@ -1,131 +1,96 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 using TMPro;
 
-public class numberHouseController : MonoBehaviour
+public class MathQuizManager : MonoBehaviour
 {
-    [SerializeField]
-    private int _minValue = 1;
-    [SerializeField]
-    private int _maxValue = 10;
-    [SerializeField]
-    public GameObject cookieObject;
-    [SerializeField]
-    public GameObject monsterObject;
+    [Header("Problem and Input Field References")]
+    public TMP_Text[] problemTexts; // Array of problem Text UI elements
+    public TMP_InputField[] answerInputs; // Array of InputField UI elements
+    public Button checkButton; // Button to check all answers
+    public Button resetButton; // Button to reset the game
+    public TMP_Text feedbackText; // Feedback for the current round
+    public TMP_Text scoreText; // Text to display total score
+    public int maxNumber = 10; // Maximum number for problems
 
-    private int _number1;
-    private int _number2;
-    private int _number3;
-    private int _number4;
-    private int _number5;
-    private int _number6;
-    private int _number7;
-    private int _number8;
-    private int _number9;
-    private int _number10;
-    private int _answer;
-    private int _userAnswer1;
-    private int _userAnswer2;
-    private int _userAnswer3;
-    private int _userAnswer4;
-    private int _userAnswer5;
-    private int _userAnswer6;
-    private int _userAnswer7;
-    private int _userAnswer8;
-    private int _userAnswer9;
-    private int _userAnswer10;
-    private int nums = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    private int randNums = {};
-    // Array of strings to display
-    public string[] textArray;
+    private int[] problems; // Array of problem values
+    private int totalScore; // Total correct answers across rounds
 
-    // List of 10 Text UI elements
-    public Text[] textBoxes;
-
-
-    public void ShowMonsterImage()
+    void Start()
     {
-        monsterObject.SetActive(true); // Makes the image visible
+        totalScore = 0; // Initialize score
+        UpdateScoreText(); // Update the score display
+        InitializeGame(); // Set up the game for the first time
+
+        // Add listeners to buttons
+        checkButton.onClick.AddListener(CheckAnswers);
+        resetButton.onClick.AddListener(InitializeGame);
     }
 
-    public void HideMonsterImage()
+    void InitializeGame()
     {
-        monsterObject.SetActive(false); // Makes the image invisible
-    }
-    
-    public void ShowCookieImage()
-    {
-        cookieObject.SetActive(true); // Makes the image visible
-    }
-
-    public void HideCookieImage()
-    {
-        cookieObject.SetActive(false); // Makes the image invisible
-    }
-
-    static void Shuffle(int[] array)
-    {
-        Random rand = new Random();
-        int n = array.Length;
-
-        for (int i = n - 1; i > 0; i--)
+        // Generate and shuffle problems
+        problems = new int[maxNumber];
+        for (int i = 0; i < problems.Length; i++)
         {
-            // Pick a random index from 0 to i
-            int j = rand.Next(0, i + 1);
-
-            // Swap array[i] with the element at random index
-            Swap(array, i, j);
+            problems[i] = i + 1; // Random values from 0 to 10
         }
-    }
+        ShuffleArray(problems);
 
-    static void Swap(int[] array, int i, int j)
-    {
-        int temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-    
-    private void GenerateEquasion()
-    {
-        randNums = nums.Shuffle();
-
-        
-
-    }
-    void DisplayText()
-    {
-        // Ensure there are 10 text boxes
-        if (textBoxes.Length != 10)
+        // Assign problems to text boxes and clear input fields
+        for (int i = 0; i < problemTexts.Length; i++)
         {
-            Debug.LogError("Please assign exactly 10 text boxes in the inspector.");
-            return;
+            problemTexts[i].text = problems[i].ToString();
+            answerInputs[i].text = "";
+            answerInputs[i].image.color = Color.white; // Reset input field colors
         }
 
-        // Loop through the array and display text in each box
-        for (int i = 0; i < textBoxes.Length; i++)
+        // Clear feedback
+        feedbackText.text = "Реши примеры!";
+    }
+
+    public void CheckAnswers()
+    {
+        int correctAnswers = 0;
+
+        // Loop through all problems and validate answers
+        for (int i = 0; i < problems.Length; i++)
         {
-            // Check if there's corresponding text in the array
-            if (i < textArray.Length)
+            int expectedAnswer = maxNumber - problems[i];
+            int playerAnswer;
+
+            // Check if input is valid and correct
+            if (int.TryParse(answerInputs[i].text, out playerAnswer) && playerAnswer == expectedAnswer)
             {
-                textBoxes[i].text = textArray[i];
+                correctAnswers++;
+                answerInputs[i].image.color = Color.green; // Highlight correct answer field
             }
             else
             {
-                // Clear any remaining text boxes if the array has fewer elements
-                textBoxes[i].text = string.Empty;
+                answerInputs[i].image.color = Color.red; // Highlight incorrect answer field
             }
         }
+
+        // Update feedback and score
+        feedbackText.text = correctAnswers + " из " + maxNumber + " правильных ответов!";
+        totalScore += correctAnswers;
+        UpdateScoreText();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void UpdateScoreText()
     {
-        
+        scoreText.text = "Очки: " + totalScore.ToString();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void ShuffleArray(int[] array)
     {
-        
+        for (int i = array.Length - 1; i > 0; i--)
+        {
+            int randomIndex = Random.Range(0, i + 1);
+            int temp = array[i];
+            array[i] = array[randomIndex];
+            array[randomIndex] = temp;
+        }
     }
 }

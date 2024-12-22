@@ -1702,7 +1702,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneNameChange1: plusLvl
   sceneNameChange2: minusLvl
-  sceneNameChange3: 
+  sceneNameChange3: houseLvlChoose
   sceneNameChange4: mainMenu
 --- !u!4 &1883567147
 Transform:
